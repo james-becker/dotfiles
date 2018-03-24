@@ -4,12 +4,12 @@ ZSH=$HOME/.oh-my-zsh
 #   https://github.com/robbyrussell/oh-my-zsh/wiki/themes
 ZSH_THEME="robbyrussell"
 
-if [ -z "$SSH_AUTH_SOCK" ] ; then
-  eval `ssh-agent -s`
-  ssh-add
+if [ -f ~/.ssh/ssh-ident ]; then
+  alias ssh=~/.ssh/ssh-ident
+  echo "ssh-ident has been discovered, enabling"
+else
+  echo "ssh-ident appears to be missing. no action taken"
 fi
-
-trap 'test -n "$SSH_AUTH_SOCK" && eval `/usr/bin/ssh-agent -k`' 0
 
 # Useful plugins for Rails development with Sublime Text
 plugins=(gitfast last-working-dir common-aliases sublime zsh-syntax-highlighting history-substring-search)
